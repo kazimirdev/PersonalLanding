@@ -1,0 +1,53 @@
+# PHP project: common ignores
+
+# Composer
+vendor/
+composer.phar
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs, cache, sessions, temp
+*.log
+logs/
+cache/
+tmp/
+sessions/
+storage/
+uploads/
+public/uploads/
+
+# PHPUnit
+.phpunit.result.cache
+
+# SQL dumps and DB files
+*.sql
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+
+# MySQL runtime socket (local dev)
+mysql.sock
+/var/lib/mysql/
+
+# IDE and editor files
+.idea/
+.vscode/
+nbproject/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup and swap files
+*~
+*.swp
+*.swx
+.#*
+
+# Node (if present)
+node_modules/
+
