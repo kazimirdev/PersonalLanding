@@ -47,10 +47,6 @@ a:hover {
     
 }
 
-br {
-    line-height: 1.5rem;
-}
-
 line {
   color: var(--text-color) 
 }
@@ -84,6 +80,7 @@ main {
 
 main a {
   text-decoration: none;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .main-page-links {
@@ -184,4 +181,18 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+footer {
+  display: grid;
+  justify-content: space-evenly;
+  padding: 0.15rem;
+  color: var(--text-color);
+  width: 100%;
+  margin-top: 1.5rem;
+  bottom: 0;
+}
+
+footer p {
+  font-size: 1rem;
 }
