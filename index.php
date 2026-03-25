@@ -1,27 +1,4 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kazimir.dev</title>
-    <link rel="stylesheet" href="static/css/style.css">
-    <link rel="icon" href="static/img/favicon.ico">
-</head>
-<body>  
-    <header>
-        <block class="lang-switch">
-            <label class="switch">
-                <input type="checkbox" id="lang-switcher">
-                <span class="slider round"></span>
-            </label>
-        </block>
-        <h1>kazimir.dev</h1>
-        <block class="theme-switch">
-            <label class="switch">
-                <input type="checkbox" id="theme-switcher">
-                <span class="slider round"></span>
-            </label>
-        </block>
-    </header>
+    <?php include 'header.php'; ?>
     <main>
         <div class ="main-page-links">  
             <h2>website links</h2>
@@ -38,5 +15,6 @@
             <a href="mailto:kazimirdev@tuta.io">mail</a>
         </div>
     </main>
+    <?php include 'footer.php'; ?>
     <script src="static/js/script.js"></script>
 </body>
