@@ -2,10 +2,10 @@
     <main>
         <div class ="main-page-links">  
             <h2>website links</h2>
-            <a href="https://kazimir.dev/resume.pdf" target="_blank">blog</a><br/>
-            <a href="https://kazimir.dev/resume.pdf" target="_blank">products</a><br/>
-            <a href="https://kazimir.dev/resume.pdf" target="_blank">projects</a><br/>
-            <a href="https://kazimir.dev/resume.pdf" target="_blank">cv.pdf</a><br/>
+            <a href="blog.php" target="_blank">blog</a><br/>
+            <a href="products.php" target="_blank">products</a><br/>
+            <a href="projects.php" target="_blank">projects</a><br/>
+            <a href="cv.pdf" target="_blank">cv.pdf</a><br/>
             <line>--------------------------------</line>
             <h2>social links</h2>
             <a href="https://github.com/kazimirdev" target="_blank">github</a><br>

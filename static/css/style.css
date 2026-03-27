@@ -84,7 +84,7 @@ main a {
 }
 
 .main-page-links {
-    margin-top: 4rem;
+    margin-top: 1rem;
     display: grid;
     justify-items: stretch;
     justify-content: space-evenly;
@@ -185,14 +185,24 @@ input:checked + .slider:before {
 
 footer {
   display: grid;
-  justify-content: space-evenly;
+  grid-auto-flow: column;
+  justify-content: space-around;
   padding: 0.15rem;
   color: var(--text-color);
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   bottom: 0;
 }
 
-footer p {
-  font-size: 1rem;
+footer .font-settings, footer .page-width-settings {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+form.boxed {
+  display: inline-block;
+  padding: 0.5rem;
+  border: solid var(--thrird-color) 0.1rem;
+  border-radius: 0.5rem;
 }
