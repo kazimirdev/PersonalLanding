@@ -2,7 +2,7 @@
 
 ## Plan:
 1. Безопасная интеграция PHP запросов
-2. Куки
+2. Cookie (page width)
 3. i18n
 4. Docker (+ webserver + db)
 5. Blog (.md support with images)
@@ -12,3 +12,4 @@
 ## Do:
 
 ## Done:
+1. Cookie files (theme, font size, i18n) (28/03/2026)

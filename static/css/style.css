@@ -8,6 +8,33 @@
     --thrird-color: #000;
     --text-color: #000;
     --hover-color: #ed008c;
+    --font-size-p:  1.425rem;
+    --font-size-h1: 1.65rem;
+    --font-size-h2: 1.6rem;
+    --font-size-h3: 1.55rem;
+    --font-size-h4: 1.5rem;
+    --font-size-h5: 1.45rem;
+    --font-size-h6: 1.425rem;
+}
+
+:root[data-font-size="small"] {
+    --font-size-p:  1.275rem;
+    --font-size-h1: 1.5rem;
+    --font-size-h2: 1.45rem;
+    --font-size-h3: 1.4rem;
+    --font-size-h4: 1.35rem;
+    --font-size-h5: 1.3rem;
+    --font-size-h6: 1.275rem;
+}
+
+:root[data-font-size="large"] {
+    --font-size-p:  1.575rem;
+    --font-size-h1: 1.7rem;
+    --font-size-h2: 1.675rem;
+    --font-size-h3: 1.65rem;
+    --font-size-h4: 1.625rem;
+    --font-size-h5: 1.6rem;
+    --font-size-h6: 1.575rem;
 }
 
 :root[data-theme="dark"] {
@@ -38,7 +65,19 @@ html {
 
 a, h1, h2, p {
     color: var(--text-color);
-    font-size: 1.5rem;
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+}
+
+p {
+    font-size: var(--font-size-p);
+    margin-block: 0;
 }
 
 a:hover {
@@ -52,6 +91,8 @@ line {
 }
 
 body {
+  display: grid;
+  align-content: space-evenly;
   height: 98vh;
   animation: activeGradient 15s infinite alternate;
   background: radial-gradient(circle, var(--primary-color),  var(--secondary-color));
@@ -74,7 +115,6 @@ header h1 {
 }
 
 main {
-    padding: 8rem 0 0 0;
     text-align: center;
     justify-content: center;
 }
@@ -190,7 +230,7 @@ footer {
   justify-content: space-between;
   position: fixed;
   color: var(--text-color);
-  width: 98%;
+  width: 99%;
   margin: 2.5rem 0 0.5rem 0;
   bottom: 0;
 }
@@ -210,6 +250,8 @@ label.boxed {
   border: solid var(--thrird-color) 0.3rem;
   border-radius: 0.5rem;
   animation: 0.5s ease-in-out 0s 1 hoverEffect;
+  margin-inline-end: 2.5rem;
+  margin-inline-start: 2.5rem;
 }
 
 label.boxed:hover {

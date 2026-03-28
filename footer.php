@@ -1,7 +1,7 @@
 <footer>
     <div class="font-settings">
         <div class="font-modifier-buttons radio-horizontal">
-            <form class="boxed" id="font-size-form">
+            <form class="boxed" id="font-size">
                 <input type="radio" id="font-small" name="font-size" value="small">
                 <label class="boxed" for="font-small">-A</label>
                 <input type="radio" id="font-medium" name="font-size" value="medium">
@@ -13,9 +13,9 @@
     </div>
     <div class="page-width-settings">
         <div class="page-width-modifier-buttons radio-horizontal">
-            <form class="boxed" id="page-width-form">
-                <input type="radio" id="page-tall" name="page-width" value="tall">
-                <label class="boxed" for="page-tall">Tall</label>
+            <form class="boxed" id="page-width">
+                <input type="radio" id="page-narrow" name="page-width" value="narrow">
+                <label class="boxed" for="page-narrow">Narrow</label>
                 <input type="radio" id="page-wide" name="page-width" value="wide">
                 <label class="boxed" for="page-wide">Wide</label>
             </form>
