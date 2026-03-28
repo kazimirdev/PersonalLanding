@@ -53,18 +53,19 @@ line {
 
 body {
   height: 98vh;
-  animation: activeGradient 5s infinite alternate;
+  animation: activeGradient 15s infinite alternate;
   background: radial-gradient(circle, var(--primary-color),  var(--secondary-color));
   background-size: 400% 400%;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-auto-flow: column;
     align-items: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    
+    justify-content: space-between;
+    position: fixed;
+    width: 98%;
+    right: 1%;
 }
 
 header h1 {
@@ -73,7 +74,7 @@ header h1 {
 }
 
 main {
-    padding: 2rem;
+    padding: 8rem 0 0 0;
     text-align: center;
     justify-content: center;
 }
@@ -186,11 +187,11 @@ input:checked + .slider:before {
 footer {
   display: grid;
   grid-auto-flow: column;
-  justify-content: space-around;
-  padding: 0.15rem;
+  justify-content: space-between;
+  position: fixed;
   color: var(--text-color);
-  width: 100%;
-  margin-top: 2.5rem;
+  width: 98%;
+  margin: 2.5rem 0 0.5rem 0;
   bottom: 0;
 }
 
@@ -200,9 +201,39 @@ footer .font-settings, footer .page-width-settings {
   align-items: center;
 }
 
-form.boxed {
+label.boxed {
+  text-align: center;
   display: inline-block;
+  font-weight: bold;
+  min-width: 1rem;
   padding: 0.5rem;
-  border: solid var(--thrird-color) 0.1rem;
+  border: solid var(--thrird-color) 0.3rem;
   border-radius: 0.5rem;
+  animation: 0.5s ease-in-out 0s 1 hoverEffect;
+}
+
+label.boxed:hover {
+  background-color: var(--hover-color);
+  color: var(--text-color);
+  animation: 0.5s ease-in-out 0s 1 hoverEffect;
+}
+
+/* Add a border on hover if picked*/
+.boxed input[type="radio"]:checked + label {
+  border: solid var(--hover-color) 0.3rem;
+  background-color: none;
+}
+
+.boxed input[type="radio"] {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  footer {
+    justify-content: center;
+  }
+  footer .page-width-settings {
+    display: none;
+  }
+
 }

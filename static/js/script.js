@@ -9,8 +9,9 @@ themeSwitcher.addEventListener('change', function() {
     }
 });
 
-themeSwitcher.addEventListener('change', function() {
-    if (themeSwitcher.checked) {
+// TODO: Add lang switcher functionality
+langSwitcher.addEventListener('change', function() {
+    if (langSwitcher.checked) {
         document.documentElement.setAttribute('lang-theme', 'pl');
     } else {
         document.documentElement.removeAttribute('lang-theme');
