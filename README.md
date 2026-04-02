@@ -1,15 +1,15 @@
 # Kanban:
 
 ## Plan:
-1. Безопасная интеграция PHP запросов
-2. Cookie (page width)
-3. i18n
-4. Docker (+ webserver + db)
-5. Blog (.md support with images)
-6. Store (cards with payment support)
-7. Testing
-8. SelfHosting
+- Docker (+ webserver + db)
+- Store (cards with payment support)
+- Testing (Debug, PenTest)
+- SelfHosting
 ## Do:
+- Blog (.md support with images)
+- i18n
 
 ## Done:
-1. Cookie files (theme, font size, i18n) (28/03/2026)
+- Cookie files (theme, font size, i18n) (28/03/2026)
+- Безопасная интеграция PHP запросов (02/04/2026)
+- Cookie (page width)
