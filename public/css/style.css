@@ -118,6 +118,13 @@ header h1 {
     color: var(--text-color);
 }
 
+.central-header {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: baseline;
+  gap: 1rem;
+}
+
 main {
     text-align: center;
     justify-content: center;
@@ -129,7 +136,6 @@ main a {
 }
 
 .main-page-links {
-    margin-top: 1rem;
     display: grid;
     justify-items: stretch;
     justify-content: space-evenly;
@@ -274,7 +280,7 @@ label.boxed:hover {
   display: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 960px) {
   footer {
     justify-content: center;
   }
