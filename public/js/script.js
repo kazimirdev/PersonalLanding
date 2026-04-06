@@ -43,14 +43,22 @@ if (currentLang === 'pl') {
     langSwitcher.checked = false;
 }
 
-langSwitcher.addEventListener('change', function() {
-    if (langSwitcher.checked) {
-        document.documentElement.setAttribute('lang', 'pl');
-        setCookie('lang', 'pl', timestampDays30);
-    } else {
-        document.documentElement.removeAttribute('lang');
-        setCookie('lang', 'en', timestampDays30);
+langSwitcher.addEventListener('change', async function() {
+    let newLang = langSwitcher.checked ? 'pl' : 'en';
+
+    setCookie('lang', newLang, timestampDays30);
+
+    let path = window.location.pathname;
+    path = path.replace(/^\/(en|pl)(\/|$)/, '/'); // Remove existing lang prefix
+    if (newLang === 'en') {
+    // wait 1s for better user experience when switching to English, 
+    // 'cause the double visual change is a bit jarring when 
+    // switching back to English from Polish
+        await new Promise(resolve => setTimeout(resolve, 1000));
     }
+    window.location.pathname = '/' + newLang + path; // Redirect to the new path
+
+    // location.reload(); // Reload the page to apply language changes
 });
 
 // Text Size

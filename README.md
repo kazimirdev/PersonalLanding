@@ -5,8 +5,9 @@
 - Store (cards with payment support)
 - Testing (Debug, PenTest)
 - SelfHosting
+- Blog Feed (with category filter) 
+- Blog Page (.md support with images)
 ## Do:
-- Blog (.md support with images)
 - i18n
 
 ## Done:

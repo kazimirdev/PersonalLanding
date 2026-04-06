@@ -14,20 +14,26 @@
      * all other files should be protected from direct access.
      */
     declare(strict_types=1); // declare strict types for better type safety
+
     header("Content-Type: text/html; charset=UTF-8"); // set content type header for proper encoding
+    
+    require_once __DIR__ . '/../app/Middlewares/I18N.php';
+    require_once __DIR__ . '/../app/Helpers/i18n.php';
+
+    $i18n = I18N::init(); // initialize i18n and get locale, clean URI, and language data
+    $uri = $i18n['uri']; // use the clean URI for routing
+    $GLOBALS['locale'] = $i18n['locale']; // make locale available globally
+    $GLOBALS['lang'] = $i18n['lang']; // make language data available globally
 
     spl_autoload_register(function ($class) {
         // spl_autoload_register is used to automatically load classes when they are needed,
         // it takes a callback function that will be called with the class name as an argument.
         require_once __DIR__ . '/../app/Controllers/' . $class . '.php';
     });
-    // Basic routing logic: normalize path and remove trailing slash except root.
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
-    $uri = str_replace('/index.php', '', $uri);
-    $uri = '/' . ltrim($uri, '/');
 
-    if ($uri !== '/' && str_ends_with($uri, '/')) {
-        $targetPath = rtrim($uri, '/');
+    $browserUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);  
+    if ($browserUri !== '/' && str_ends_with($browserUri, '/')) {
+        $targetPath = rtrim($browserUri, '/');
         $query = $_SERVER['QUERY_STRING'] ?? '';
         if ($query !== '') {
             $targetPath .= '?' . $query;
@@ -38,7 +44,6 @@
     }
 
     // Define the routes for the application.
-    // TODO: i18n (/en/blog, /pl/blog, etc.)
     // TODO: dynamic routes (/blog/{slug}, etc.)
     // TODO: middleware (auth, etc.)
     // TODO: HTTP method handling (GET, POST, etc.)
