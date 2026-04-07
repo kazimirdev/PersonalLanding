@@ -54,7 +54,7 @@ langSwitcher.addEventListener('change', async function() {
     // wait 1s for better user experience when switching to English, 
     // 'cause the double visual change is a bit jarring when 
     // switching back to English from Polish
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 350));
     }
     window.location.pathname = '/' + newLang + path; // Redirect to the new path
 
