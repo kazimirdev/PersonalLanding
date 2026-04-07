@@ -16,10 +16,12 @@
     declare(strict_types=1); // declare strict types for better type safety
 
     header("Content-Type: text/html; charset=UTF-8"); // set content type header for proper encoding
-    
+
+    require_once __DIR__ . '/../app/Core/Env.php';
     require_once __DIR__ . '/../app/Middlewares/I18N.php';
     require_once __DIR__ . '/../app/Helpers/i18n.php';
 
+    Enviroment::load(); // load environment variables from .env file
     $i18n = I18N::init(); // initialize i18n and get locale, clean URI, and language data
     $uri = $i18n['uri']; // use the clean URI for routing
     $GLOBALS['locale'] = $i18n['locale']; // make locale available globally
