@@ -26,6 +26,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./config/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
