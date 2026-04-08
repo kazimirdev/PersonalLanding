@@ -30,7 +30,20 @@
     spl_autoload_register(function ($class) {
         // spl_autoload_register is used to automatically load classes when they are needed,
         // it takes a callback function that will be called with the class name as an argument.
-        require_once __DIR__ . '/../app/Controllers/' . $class . '.php';
+        // 07/04/2026 - added support for subdirectories in Controllers and Models (e.g., BlogController, PostsModel, etc.)
+        $paths = [
+            __DIR__ . '/../app/Controllers/',
+            __DIR__ . '/../app/Models/',
+            __DIR__ . '/../app/Core/',
+        ];
+    
+        foreach ($paths as $path) {
+            $file = $path . $class . '.php';
+            if (file_exists($file)) {
+                require_once $file;
+                return;
+            }
+        }
     });
 
     $browserUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);  
