@@ -59,6 +59,19 @@ class Posts extends DatabaseModel {
         return $statement->fetch() ?: null;
     }
 
+    public function getById(int $id): ?array {
+        $statement = $this->db->prepare(
+            "SELECT p.id, p.slug, p.image_preview_url, pt.title, pt.content_md, pt.content_html, pt.locale, pt.created_at, pt.updated_at
+             FROM posts p 
+             JOIN post_translations pt ON p.id = pt.post_id 
+             WHERE p.id = :id"
+        );
+        $statement->execute(['id' => $id]);
+        return $statement->fetch() ?: null;
+    }
+
+
 }
+
 
 ?>

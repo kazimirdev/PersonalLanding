@@ -23,7 +23,5 @@
     </div>
 
 </footer>
-
-    <script src="/js/script.js"></script>
-    <script>const currentLang = "<?= $GLOBALS['locale'] ?>";</script>
+<?php include __DIR__ . '/script.php'; ?>
 </body>

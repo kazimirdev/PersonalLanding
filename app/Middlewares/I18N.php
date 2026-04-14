@@ -37,5 +37,9 @@ class I18N {
         $cleanUri = $cleanUri === '/' ? '/' : rtrim($cleanUri, '/'); // Ensure root is just '/'
         return ['locale' => $locale, 'uri' => $cleanUri, 'lang' => $lang];
     }
+
+    public static function getSupportedLocales(): array {
+        return self::$supportedLocales;
+    }
 }
 ?>

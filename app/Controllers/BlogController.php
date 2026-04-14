@@ -7,6 +7,8 @@
             $postModel = new Posts();
             $posts = $postModel->getAllByLocale($GLOBALS['locale']);
 
+            
+
             require __DIR__ . '/../Views/blog/index.php';
         }
     }

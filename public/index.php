@@ -14,10 +14,10 @@
      * all other files should be protected from direct access.
      */
     declare(strict_types=1); // declare strict types for better type safety
-
+    session_start(); // start the session for authentication and other session-based features
     header("Content-Type: text/html; charset=UTF-8"); // set content type header for proper encoding
 
-    require_once __DIR__ . '/../app/Core/Env.php';
+    require_once __DIR__ . '/../app/Core/Enviroment.php';
     require_once __DIR__ . '/../app/Middlewares/I18N.php';
     require_once __DIR__ . '/../app/Helpers/i18n.php';
 
@@ -65,11 +65,32 @@
     $routes = [
         // key is the URI, 
         // value is an array with controller and method to call
+        // public routes
         '/' => ['HomeController', 'index'],
         '/blog' => ['BlogController', 'index'],
+        '/blog/<slug>' => ['BlogController', 'show'],
         '/products' => ['ProductsController', 'index'],
+        '/products/<slug>' => ['ProductsController', 'show'],
         '/cv.pdf' => ['CVController', 'index'],
-        '/error' => ['ErrorController', 'index']
+        '/error' => ['ErrorController', 'index'],
+        // Admin routes
+        '/admin' => ['AdminAuthController', 'index'],
+        '/admin/login' => ['AdminAuthController', 'login'],
+        '/admin/logout' => ['AdminAuthController', 'logout'],
+        '/admin/dashboard' => ['AdminDashboardController', 'index'],
+        '/admin/blog-posts' => ['AdminBlogPostController', 'index'],
+        '/admin/blog-posts/create' => ['AdminBlogPostController', 'create'],
+        '/admin/blog-posts/edit/<id>' => ['AdminBlogPostController', 'edit'],
+        '/admin/blog-tags' => ['AdminBlogTagsController', 'index'],
+        '/admin/blog-tags/create' => ['AdminBlogTagsController', 'create'],
+        '/admin/blog-tags/edit/<id>' => ['AdminBlogTagsController', 'edit'],
+        '/admin/products' => ['AdminProductController', 'index'],
+        '/admin/products/create' => ['AdminProductController', 'create'],
+        '/admin/products/edit/<id>' => ['AdminProductController', 'edit'],
+        '/admin/orders' => ['AdminOrderController', 'index'],
+        '/admin/orders/create' => ['AdminOrderController', 'create'],
+        '/admin/orders/edit/<id>' => ['AdminOrderController', 'edit'],
+
     ];
 
     function getErrorDescription(int $errorCode): string {

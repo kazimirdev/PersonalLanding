@@ -7,9 +7,9 @@
             </label>
         </block>
         <div class="central-header"> 
-            <?php if (!($page_title_header)): ?>
+            <?php if (!$page_title_header): ?>
                 <h1><a href="/" style="visibility: hidden"> ⇇   </a></h1>
-                <h1>kazimir.dev</h1>
+                <h1>[kazimir.dev]</h1>
             <?php else: ?>
                 <h1><a href="/"> ⇇   </a></h1>
                 <h1><?= get_i18n($page_title_header) ?></h1>
