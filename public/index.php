@@ -58,14 +58,14 @@
         exit;
     }
 
-    // Define the routes for the application.
+    // Define the routes for the client application.
     // TODO: dynamic routes (/content/{slug}, etc.)
     // TODO: middleware (auth, etc.)
     // TODO: HTTP method handling (GET, POST, etc.)
     $routes = [
         // key is the URI, 
         // value is an array with controller and method to call
-        // public routes
+        // client public routes only
         '/' => ['HomeController', 'index'],
         '/content' => ['ContentController', 'index'],
         '/content/<slug>' => ['ContentController', 'show'],
@@ -73,25 +73,6 @@
         '/products/<slug>' => ['ProductsController', 'show'],
         '/cv.pdf' => ['CVController', 'index'],
         '/error' => ['ErrorController', 'index'],
-        // Admin routes
-        '/admin' => ['AdminAuthController', 'index'],
-        '/admin/login' => ['AdminAuthController', 'login'],
-        '/admin/logout' => ['AdminAuthController', 'logout'],
-        '/admin/dashboard' => ['AdminDashboardController', 'index'],
-        '/admin/content' => ['AdminContentController', 'index'],
-        '/admin/content/create' => ['AdminContentController', 'create'],
-        '/admin/content/store' => ['AdminContentController', 'store'],
-        '/admin/content/edit/<id>' => ['AdminContentController', 'edit'],
-        '/admin/content-tags' => ['AdminContentTagsController', 'index'],
-        '/admin/content-tags/create' => ['AdminContentTagsController', 'create'],
-        '/admin/content-tags/edit/<id>' => ['AdminContentTagsController', 'edit'],
-        '/admin/products' => ['AdminProductController', 'index'],
-        '/admin/products/create' => ['AdminProductController', 'create'],
-        '/admin/products/edit/<id>' => ['AdminProductController', 'edit'],
-        '/admin/orders' => ['AdminOrderController', 'index'],
-        '/admin/orders/create' => ['AdminOrderController', 'create'],
-        '/admin/orders/edit/<id>' => ['AdminOrderController', 'edit'],
-
     ];
 
     function getErrorDescription(int $errorCode): string {

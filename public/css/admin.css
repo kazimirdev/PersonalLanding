@@ -550,14 +550,15 @@ footer .theme-selector {
 /* admin/content */
 
 .post-item {
+    width: stretch;
     display: grid;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: stretch
     padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 0.25rem;
-    background-color: var(--secondary-background-color);
+    background: var(--background-color);
 }
 
 .post-actions {
@@ -592,4 +593,152 @@ footer .theme-selector {
     .library-grid {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background-color: var(--secondary-background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+table thead th {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--border-color);
+}
+
+table tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table tbody tr:hover {
+    background-color: var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Container for tables */
+.posts-containers {
+    display: grid;
+    justify-content: stretch;
+    justify-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: var(--secondary-background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+}
+
+
+/* Item listing styles */
+.post-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    border-radius: 0.25rem 0.25rem 0 0;
+    margin-bottom: 0;
+}
+
+.post-price {
+    padding: 0.5rem 1rem;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.post-date {
+    padding: 0.5rem 1rem;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.post-actions {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+
+.post-actions a {
+    text-decoration: none;
+}
+
+.edit-post, .delete-post, .show-post {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.edit-post {
+    background-color: #28a745;
+    color: white;
+}
+
+.edit-post:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.delete-post {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-post:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.show-post {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.show-post:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.create-new-post {
+    background-color: #17a2b8;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.create-new-post:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
