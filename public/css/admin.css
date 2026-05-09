@@ -547,6 +547,25 @@ footer .theme-selector {
     font-weight: 600;
 }
 
+/* admin/content */
+
+.post-item {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--secondary-background-color);
+}
+
+.post-actions {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1rem;
+}
+
 .preview-remove-btn:hover {
     background-color: #c82333;
 }

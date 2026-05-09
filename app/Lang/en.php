@@ -1,8 +1,8 @@
 <?php
 return [
-    'website_links' => 'Website Links',
-    'social_links' => 'Social Links',
-    'blog' => 'Blog',
-    'products' => 'Products',
+    'website_links' => 'website Links',
+    'social_links' => 'social Links',
+    'content' => 'content',
+    'products' => 'products',
 ];
 ?>

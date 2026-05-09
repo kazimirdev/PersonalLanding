@@ -5,14 +5,14 @@
         
         $dashboardItems = [
             [
-                'title' => 'Blog Posts', 
+                'title' => 'Content Posts', 
                 'count' => $countPosts ?? 0,
-                'link' => '/admin/blog-posts',
+                'link' => '/admin/content',
             ],
             [
-                'title' => 'Blog Tags', 
+                'title' => 'Content Tags', 
                 'count' => $countTags ?? 0,
-                'link' => '/admin/blog-tags',
+                'link' => '/admin/content-tags',
             ],
             [
                 'title' => 'Products', 

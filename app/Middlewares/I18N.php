@@ -41,5 +41,9 @@ class I18N {
     public static function getSupportedLocales(): array {
         return self::$supportedLocales;
     }
+
+    public static function get_locale(): string {
+        return $GLOBALS['locale'] ?? self::$defaultLocale;
+    }
 }
 ?>

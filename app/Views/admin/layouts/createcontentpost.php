@@ -1,10 +1,10 @@
 <main>
-    <form method="POST" action="/admin/posts/store">
+    <form method="POST" action="/admin/content/store">
         <?php 
         if (isset($locales)) {
             foreach ($locales as $locale) {
-                $locale = htmlspecialchars(strtoupper($locale));
-                echo "<h2>$locale</h2>";
+                $localeDisplay = htmlspecialchars(strtoupper($locale));
+                echo "<h2>$localeDisplay</h2>";
                 echo "<h3>Title</h3>";
                 echo "<input type='text' name='title_$locale'><br>";
                 echo "<h3>Content</h3>";
@@ -15,6 +15,7 @@
         <label>Slug</label>
         <input type='text' name='slug' required>
         <button type='button' onclick='generateSlug()'>Generate Slug From Title</button><br>
+        <input type='hidden' name='image_preview_url' id='imagePreviewUrlInput'>
         <div class="createpost-mediacontent">
             <h2>Media Content:</h2>
             <!-- Load any media files from drive and display them here with an option to select one as preview or content image, or allow admin to input URL of the image -->
@@ -25,7 +26,9 @@
                 </div>
                 <h3>Preview Image:</h3>
                 <div class="createpost-mediacontent-preview" id="previewContainer">
-                    <?php ?>
+                    <?php if (isset($image_preview_url)): ?>
+                        <img src="<?php echo htmlspecialchars($image_preview_url); ?>" alt="Preview Image">
+                    <?php endif; ?>
                 </div>        
             </div>
         </div>
@@ -90,6 +93,6 @@
 
         <!-- Modal Overlay -->
         <div id="mediaContentOverlay" class="modal-overlay" style="display:none;" onclick="closeMediaContentWindow()"></div>
-
+        <button type="submit">Create Post</button>
     </form>
 </main>

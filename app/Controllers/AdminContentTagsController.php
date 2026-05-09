@@ -1,16 +1,16 @@
 <?php
-class AdminTagsPostController {
+class AdminContentTagsController {
     
     public function index() {
-        require __DIR__ . '/../../Views/admin/posts/index.php';
+        require __DIR__ . '/../../Views/admin/content-tags/index.php';
     }
 
     public function create() {
-        require __DIR__ . '/../../Views/admin/posts/create.php';
+        require __DIR__ . '/../../Views/admin/content-tags/create.php';
     }
 
     public function edit($id) {
-        require __DIR__ . '/../../Views/admin/posts/edit.php';
+        require __DIR__ . '/../../Views/admin/content-tags/edit.php';
     }
 
     public function store() {
@@ -27,9 +27,9 @@ class AdminTagsPostController {
             ],
         ];
 
-        $postModel = new Posts();
-        $postModel->createPost($slug, $translations);
-        header('Location: /admin/posts');
+        $contentTagModel = new ContentTags();
+        $contentTagModel->createContentTag($slug, $translations);
+        header('Location: /admin/content-tags');
         exit;
     }
 

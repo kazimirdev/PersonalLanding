@@ -30,7 +30,7 @@
     spl_autoload_register(function ($class) {
         // spl_autoload_register is used to automatically load classes when they are needed,
         // it takes a callback function that will be called with the class name as an argument.
-        // 07/04/2026 - added support for subdirectories in Controllers and Models (e.g., BlogController, PostsModel, etc.)
+        // 07/04/2026 - added support for subdirectories in Controllers and Models (e.g., ContentController, PostsModel, etc.)
         $paths = [
             __DIR__ . '/../app/Controllers/',
             __DIR__ . '/../app/Models/',
@@ -59,7 +59,7 @@
     }
 
     // Define the routes for the application.
-    // TODO: dynamic routes (/blog/{slug}, etc.)
+    // TODO: dynamic routes (/content/{slug}, etc.)
     // TODO: middleware (auth, etc.)
     // TODO: HTTP method handling (GET, POST, etc.)
     $routes = [
@@ -67,8 +67,8 @@
         // value is an array with controller and method to call
         // public routes
         '/' => ['HomeController', 'index'],
-        '/blog' => ['BlogController', 'index'],
-        '/blog/<slug>' => ['BlogController', 'show'],
+        '/content' => ['ContentController', 'index'],
+        '/content/<slug>' => ['ContentController', 'show'],
         '/products' => ['ProductsController', 'index'],
         '/products/<slug>' => ['ProductsController', 'show'],
         '/cv.pdf' => ['CVController', 'index'],
@@ -78,12 +78,13 @@
         '/admin/login' => ['AdminAuthController', 'login'],
         '/admin/logout' => ['AdminAuthController', 'logout'],
         '/admin/dashboard' => ['AdminDashboardController', 'index'],
-        '/admin/blog-posts' => ['AdminBlogPostController', 'index'],
-        '/admin/blog-posts/create' => ['AdminBlogPostController', 'create'],
-        '/admin/blog-posts/edit/<id>' => ['AdminBlogPostController', 'edit'],
-        '/admin/blog-tags' => ['AdminBlogTagsController', 'index'],
-        '/admin/blog-tags/create' => ['AdminBlogTagsController', 'create'],
-        '/admin/blog-tags/edit/<id>' => ['AdminBlogTagsController', 'edit'],
+        '/admin/content' => ['AdminContentController', 'index'],
+        '/admin/content/create' => ['AdminContentController', 'create'],
+        '/admin/content/store' => ['AdminContentController', 'store'],
+        '/admin/content/edit/<id>' => ['AdminContentController', 'edit'],
+        '/admin/content-tags' => ['AdminContentTagsController', 'index'],
+        '/admin/content-tags/create' => ['AdminContentTagsController', 'create'],
+        '/admin/content-tags/edit/<id>' => ['AdminContentTagsController', 'edit'],
         '/admin/products' => ['AdminProductController', 'index'],
         '/admin/products/create' => ['AdminProductController', 'create'],
         '/admin/products/edit/<id>' => ['AdminProductController', 'edit'],
@@ -95,64 +96,50 @@
 
     function getErrorDescription(int $errorCode): string {
         $errorDescriptions = [
-            400 => 'Bad Request',
-            401 => 'Unauthorized',
-            402 => 'Payment Required',
-            403 => 'Forbidden',
             404 => 'Page Not Found',
-            405 => 'Method Not Allowed',
-            406 => 'Not Acceptable',
-            407 => 'Proxy Authentication Required',
-            408 => 'Request Timeout',
-            409 => 'Conflict',
-            410 => 'Gone',
-            411 => 'Length Required',
-            412 => 'Precondition Failed',
-            413 => 'Payload Too Large',
-            414 => 'URI Too Long',
-            415 => 'Unsupported Media Type',
-            416 => 'Range Not Satisfiable',
-            417 => 'Expectation Failed',
-            421 => 'Misdirected Request',
-            422 => 'Unprocessable Entity', 
-            423 => 'Locked',
-            424 => 'Failed Dependency',
-            425 => 'Too Early',
-            426 => 'Upgrade Required',
-            428 => 'Precondition Required',
-            429 => 'Too Many Requests',
-            431 => 'Request Header Fields Too Large',
-            451 => 'Unavailable For Legal Reasons',
             500 => 'Internal Server Error',
-            501 => 'Not Implemented',
-            502 => 'Bad Gateway',
-            503 => 'Service Unavailable',
-            504 => 'Gateway Timeout',
-            505 => 'HTTP Version Not Supported',
-            506 => 'Variant Also Negotiates',
-            507 => 'Insufficient Storage',
-            508 => 'Loop Detected', 
-            510 => 'Not Extended',
-            511 => 'Network Authentication Required',
-            520 => 'Unknown Error',
-            521 => 'Web Server Is Down',
-            522 => 'Connection Timed Out',
-            523 => 'Origin Is Unreachable',
-            524 => 'A Timeout Occurred',
-            525 => 'SSL Handshake Failed', 
-            526 => 'Invalid SSL Certificate',
-            527 => 'Railgun Error',
-            530 => 'Site Is Frozen',
         ];
 
         return $errorDescriptions[$errorCode] ?? 'Unknown Error';
     }
 
-    // Check if the requested URI exists in the defined routes.
-    if (array_key_exists($uri, $routes)) {
-        // If the route exists (for example, /blog), 
-        // extract the controller and method from the routes array.
-        [$controller, $method] = $routes[$uri];
+    function matchRoute($uri, $routes) {
+        // First try exact match
+        if (array_key_exists($uri, $routes)) {
+            return ['controller' => $routes[$uri][0], 'method' => $routes[$uri][1], 'params' => []];
+        }
+
+        // Try dynamic routes with parameters
+        foreach ($routes as $routePattern => $routeHandler) {
+            // Convert route pattern like /content/<slug> to regex
+            $pattern = preg_replace('/<([a-z_]+)>/', '(?P<$1>[^/]+)', $routePattern);
+            $pattern = str_replace('/', '\/', $pattern);
+            $pattern = '/^' . $pattern . '$/';
+
+            if (preg_match($pattern, $uri, $matches)) {
+                // Extract only named captures (parameter values)
+                $params = [];
+                foreach ($matches as $key => $value) {
+                    if (!is_numeric($key)) {
+                        $params[$key] = $value;
+                    }
+                }
+                return [
+                    'controller' => $routeHandler[0],
+                    'method' => $routeHandler[1],
+                    'params' => $params
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    // Try to match the requested URI against defined routes
+    $match = matchRoute($uri, $routes);
+
+    if ($match !== null) {
+        [$controller, $method, $params] = [$match['controller'], $match['method'], $match['params']];
 
         // if the controller class does not exist 
         // or the method does not exist in the controller,
@@ -163,9 +150,14 @@
             exit;
         }
         // If the controller and method exist,
-        // create an instance of the controller (for example, new HomeController())
-        // and call the method (index in this case).
-        (new $controller())->$method();
+        // create an instance of the controller and call the method
+        // passing extracted parameters if any exist
+        $controllerInstance = new $controller();
+        if (!empty($params)) {
+            $controllerInstance->$method(...array_values($params));
+        } else {
+            $controllerInstance->$method();
+        }
     } else {
         $errorCode = 404;
         $errorDescription = getErrorDescription($errorCode);

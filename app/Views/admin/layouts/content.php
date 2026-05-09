@@ -1,8 +1,5 @@
 <main>
-    <h2>Post's control page</h2>
-        <a href="/admin/content/create">
-            <div class="create-new-post admin-btn">Create new post</div>
-        </a>
+    <h2>Admin panel - content management</h2>
     <div class="posts-containers">
         
         <div class="post-item">

@@ -5,21 +5,35 @@ class Posts extends DatabaseModel {
     /*  DB Tables:
     *
     */ 
-    public function createPost(string $slug, array $translations): int {
+    public function createContentPost(
+                                string $slug, 
+                                array $translations, 
+                                string $image_preview_url): int {
         $this->db->beginTransaction();
         try {
             $statement = $this->db->prepare(
-                "INSERT INTO posts (slug) VALUES (:slug)");
-            $statement->execute(['slug' => $slug]);
+                    "INSERT INTO posts (
+                    slug, image_preview_url
+                    ) VALUES (:slug, :image_preview_url)"
+            );
+            $statement->execute([
+                'slug' => $slug, 
+                'image_preview_url' => $image_preview_url
+                ]);
             $postId = $this->db->lastInsertId();
 
             foreach ($translations as $locale => $data) {
-                $statement = $this->db->prepare(
+                $statement_post_translations = $this->db->prepare(
                     "INSERT INTO post_translations (
                         post_id, locale, title, content_md, content_html
-                        ) VALUES (:post_id, :locale, :title, :content_md, :content_html)"
+                        ) VALUES (
+                            :post_id, 
+                            :locale, 
+                            :title, 
+                            :content_md, 
+                            :content_html)"
                 );
-                $statement->execute([
+                $statement_post_translations->execute([
                     'post_id' => $postId,
                     'locale' => $locale,
                     'title' => $data['title'],
@@ -38,7 +52,15 @@ class Posts extends DatabaseModel {
 
     public function getAllByLocale(string $locale): array {
         $statement = $this->db->prepare(
-            "SELECT p.id, p.slug, p.image_preview_url, p.created_at, p.updated_at, pt.title, pt.locale 
+            "SELECT p.id, 
+                    p.slug, 
+                    p.image_preview_url, 
+                    p.created_at, 
+                    p.updated_at, 
+                    pt.title, 
+                    pt.locale,
+                    pt.content_md,
+                    pt.content_html
              FROM posts p 
              JOIN post_translations pt ON p.id = pt.post_id 
              WHERE pt.locale = :locale"
@@ -50,7 +72,7 @@ class Posts extends DatabaseModel {
     public function getBySlugAndLocale(string $slug, string $locale, bool $is_md = false): ?array {
         $content_type = $is_md ? 'content_md' : 'content_html';
         $statement = $this->db->prepare(
-            "SELECT p.id, p.slug, p.image_preview_url, pt.title, $content_type, pt.locale, pt.created_at, pt.updated_at
+            "SELECT p.id, p.slug, p.image_preview_url, pt.title, $content_type, pt.locale, p.created_at, p.updated_at
              FROM posts p 
              JOIN post_translations pt ON p.id = pt.post_id 
              WHERE p.slug = :slug AND pt.locale = :locale"

@@ -47,18 +47,6 @@
     --hover-color: #ed008c;
 }
 
-@keyframes activeGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 0%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 html {
     font-family: 'Courier New', Courier, monospace;
 }
@@ -98,9 +86,7 @@ body {
   display: grid;
   align-content: space-evenly;
   height: 98vh;
-  animation: activeGradient 15s infinite alternate;
-  background: radial-gradient(circle, var(--primary-color),  var(--secondary-color));
-  background-size: 400% 400%;
+  background-color: var(--primary-color);
 }
 
 header {
@@ -232,6 +218,27 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.content-feed {
+  display: grid;
+  justify-content: space-evenly;
+  justify-items: center;
+  align-content: center;
+}
+
+.content-post {
+  border: solid 0.25rem var(--hover-color);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.content-post a h3 {
+  font-size: var(--font-size-h3);
+}
+
+.content-post a p {
+  font-size: var(--font-size-p);
 }
 
 footer {
