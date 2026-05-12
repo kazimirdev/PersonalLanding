@@ -1,29 +1,25 @@
 services:
-  client-app:
-    build: 
-      context: .
+  website:
+    build:
+      context: ./website
       dockerfile: docker/Dockerfile
-    container_name: php-client-app
+    container_name: php-website
     ports:
       - "8080:80"
     volumes:
-      - .:/var/www/html
-    environment:
-      - APP_TYPE=client
+      - ./website:/var/www/html
     depends_on:
       - db
 
-  admin-app:
-    build: 
-      context: .
+  admin-panel:
+    build:
+      context: ./admin-panel
       dockerfile: docker/Dockerfile
-    container_name: php-admin-app
+    container_name: php-admin-panel
     ports:
       - "8888:80"
     volumes:
-      - .:/var/www/html
-    environment:
-      - APP_TYPE=admin
+      - ./admin-panel:/var/www/html
     depends_on:
       - db
 
@@ -42,7 +38,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./config/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./website/config/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

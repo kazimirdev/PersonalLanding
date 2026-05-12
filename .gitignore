@@ -18,6 +18,8 @@ sessions/
 storage/
 uploads/
 public/uploads/
+website/public/uploads/
+admin-panel/public/uploads/
 
 # PHPUnit
 .phpunit.result.cache
