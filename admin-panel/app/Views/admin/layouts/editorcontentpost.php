@@ -1,6 +1,6 @@
 <main class="admin-edit-panel">
     <div class="edit-header">
-        <h1>Edit Post</h1>
+        <h1>Text Redactor</h1>
         <div class="edit-actions">
             <a href="/content" class="btn btn-secondary">← Back to Posts</a>
         </div>
@@ -51,11 +51,11 @@
             </div>
 
             <div class="language-content">
-                <?php if (isset($locales) && isset($post['translations'])): ?>
-                    <?php foreach ($locales as $locale): ?>
-                        <div class="lang-panel" data-locale="<?php echo htmlspecialchars($locale); ?>" style="display: <?php echo $locale === $locales[0] ? 'block' : 'none'; ?>;">
+                <?php if (isset($locales)): ?>
+                    <?php foreach ($locales as $index => $locale): ?>
+                        <div class="lang-panel" data-locale="<?php echo htmlspecialchars($locale); ?>" style="display: <?php echo $index === 0 ? 'block' : 'none'; ?>;">
                             <?php 
-                            $translation = $post['translations'][$locale] ?? [];
+                            $translation = ($post['translations'][$locale] ?? null) ?: [];
                             $title = htmlspecialchars($translation['title'] ?? '');
                             $content = htmlspecialchars($translation['content_md'] ?? '');
                             ?>

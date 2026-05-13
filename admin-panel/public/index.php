@@ -68,6 +68,7 @@
         '/content/store' => ['AdminContentController', 'store'],
         '/content/edit/<id>' => ['AdminContentController', 'edit'],
         '/content/<id>/edit' => ['AdminContentController', 'edit'],
+        '/content/<id>/update' => ['AdminContentController', 'update'],
         '/content/<id>/delete' => ['AdminContentController', 'delete'],
         '/content-tags' => ['AdminContentTagsController', 'index'],
         '/content-tags/create' => ['AdminContentTagsController', 'create'],
@@ -149,6 +150,7 @@
             $instance = new $controller();
             $instance->$method(...array_values($params));
         } catch (Exception $e) {
+            error_log('Admin app error: ' . $e->getMessage() . "\n" . $e->getTraceAsString());
             $errorCode = 500;
             $errorDescription = getErrorDescription($errorCode);
             (new ErrorController())->index($errorCode, $errorDescription);

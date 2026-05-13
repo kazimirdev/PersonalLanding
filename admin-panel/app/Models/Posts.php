@@ -83,13 +83,34 @@ class Posts extends DatabaseModel {
 
     public function getById(int $id): ?array {
         $statement = $this->db->prepare(
-            "SELECT p.id, p.slug, p.image_preview_url, pt.title, pt.content_md, pt.content_html, pt.locale, pt.created_at, pt.updated_at
+            "SELECT p.id, p.slug, p.image_preview_url, p.created_at, p.updated_at
              FROM posts p 
-             JOIN post_translations pt ON p.id = pt.post_id 
              WHERE p.id = :id"
         );
         $statement->execute(['id' => $id]);
-        return $statement->fetch() ?: null;
+        $post = $statement->fetch();
+        
+        if (!$post) {
+            return null;
+        }
+
+        // Fetch all translations
+        $statement_trans = $this->db->prepare(
+            "SELECT locale, title, content_md, content_html
+             FROM post_translations
+             WHERE post_id = :id
+             ORDER BY locale"
+        );
+        $statement_trans->execute(['id' => $id]);
+        $translations = $statement_trans->fetchAll();
+
+        // Organize translations by locale
+        $post['translations'] = [];
+        foreach ($translations as $translation) {
+            $post['translations'][$translation['locale']] = $translation;
+        }
+
+        return $post;
     }
 
     public function getCountByLocale(string $locale): int {
@@ -107,6 +128,48 @@ class Posts extends DatabaseModel {
     public function deleteById(int $id): void {
         $statement = $this->db->prepare("DELETE FROM posts WHERE id = :id");
         $statement->execute(['id' => $id]);
+    }
+
+    public function updateContentPost(
+                                int $id,
+                                string $slug, 
+                                array $translations, 
+                                string $image_preview_url): void {
+        $this->db->beginTransaction();
+        try {
+            // Update post metadata
+            $statement = $this->db->prepare(
+                    "UPDATE posts SET slug = :slug, image_preview_url = :image_preview_url WHERE id = :id"
+            );
+            $statement->execute([
+                'id' => $id,
+                'slug' => $slug, 
+                'image_preview_url' => $image_preview_url
+            ]);
+
+            // Update translations
+            foreach ($translations as $locale => $data) {
+                $statement_trans = $this->db->prepare(
+                    "UPDATE post_translations SET 
+                        title = :title, 
+                        content_md = :content_md, 
+                        content_html = :content_html 
+                    WHERE post_id = :post_id AND locale = :locale"
+                );
+                $statement_trans->execute([
+                    'post_id' => $id,
+                    'locale' => $locale,
+                    'title' => $data['title'],
+                    'content_md' => $data['content_md'],
+                    'content_html' => $data['content_html']
+                ]);
+            }
+
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
 

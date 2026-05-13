@@ -33,6 +33,7 @@ class AdminContentController {
         $this->requireAuth();
         $postModel = new Posts();
         $post = $postModel->getById($id);
+        $locales = I18N::getSupportedLocales();
         require __DIR__ . '/../Views/admin/content/edit.php';
     }
 
@@ -63,6 +64,29 @@ class AdminContentController {
         ];
         $postModel = new Posts();
         $postModel->createContentPost($slug, $translations, $image_preview_url);
+        header('Location: /content');
+        exit;
+    }
+
+    public function update($id) {
+        $this->requireAuth();
+        $slug = $_POST['slug'] ?? null;
+        $image_preview_url = $_POST['image_preview_url'] ?? null;
+
+        $translations = [
+            'en' => [
+                'title' => $_POST['title_en'] ?? null,
+                'content_md' => $_POST['content_en'] ?? null,
+                'content_html' => nl2br(htmlspecialchars($_POST['content_en'] ?? '')),
+            ],
+            'pl' => [
+                'title' => $_POST['title_pl'] ?? null,
+                'content_md' => $_POST['content_pl'] ?? null,
+                'content_html' => nl2br(htmlspecialchars($_POST['content_pl'] ?? '')),
+            ],
+        ];
+        $postModel = new Posts();
+        $postModel->updateContentPost($id, $slug, $translations, $image_preview_url);
         header('Location: /content');
         exit;
     }
