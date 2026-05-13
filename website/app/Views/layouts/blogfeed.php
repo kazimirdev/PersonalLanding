@@ -10,7 +10,7 @@
                 <?php if (strlen($post['content_html'] ?? '') > 200): ?>
                     <p><?= substr($post['content_html'], 0, 200) ?>...</p>
                 <?php else: ?>
-                    <p><?= $post['content_html'] ?></p>
+                    <p><?= substr($post['content_html'], 0, 128) ?></p>
                 <?php endif; ?>
         </div>
         </a>

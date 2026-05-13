@@ -7,7 +7,7 @@
     --secondary-color-theme-slider: #808080;
     --thrird-color: #000;
     --text-color: #000;
-    --hover-color: #edc500;
+    --hover-color: #ed5300;
     --font-size-p:  1.425rem;
     --font-size-h1: 1.65rem;
     --font-size-h2: 1.6rem;
@@ -15,7 +15,7 @@
     --font-size-h4: 1.5rem;
     --font-size-h5: 1.45rem;
     --font-size-h6: 1.425rem;
-    --max-content-width: 80%;
+    --max-content-width: 10%;
 }
 
 :root[data-font-size="small"] {
@@ -45,10 +45,11 @@
     --secondary-color-theme-slider: #72b043;
     --thrird-color: #818181;
     --text-color: #ffffff;
+    --hover-color: #edc500;
 }
 
 :root[data-page-width="narrow"] {
-    --max-content-width: 600px;
+    --max-content-width: 25%;
 }
 
 
@@ -363,7 +364,7 @@ label.boxed {
   display: inline-block;
   font-weight: bold;
   min-width: 1rem;
-  padding: 0.5rem;
+  padding: 0.35rem;
   border: solid var(--thrird-color) 0.3rem;
   border-radius: 0.5rem;
   animation: 0.5s ease-in-out 0s 1 hoverEffect;
@@ -389,7 +390,7 @@ label.boxed:hover {
 
 @media only screen and (min-width: 768px) {
   main {
-    max-width: var(--max-content-width);
+    margin: 5rem var(--max-content-width)
   }
 }
 
