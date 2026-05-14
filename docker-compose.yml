@@ -38,9 +38,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./website/config/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
-    command: >
-      sh -c "sed -i 's/\$${DB_NAME}/'$DB_NAME'/g' /docker-entrypoint-initdb.d/create_schema.sql && docker-entrypoint.sh mysqld"
+      - ./website/config/create_schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
 
 volumes:
   db_data:
