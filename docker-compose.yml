@@ -41,7 +41,7 @@ services:
       - ./website/config/create_schema.sql:/tmp/create_schema.sql
       - ./website/docker/entrypoint.sh:/usr/local/bin/docker-entrypoint-wrapper.sh
     entrypoint: /usr/local/bin/docker-entrypoint-wrapper.sh
-    command: docker-entrypoint.sh mysqld
+    command: mysqld
 
 volumes:
   db_data:
