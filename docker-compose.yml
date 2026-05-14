@@ -5,7 +5,7 @@ services:
       dockerfile: docker/Dockerfile
     container_name: php-website
     ports:
-      - "8080:80"
+      - "3000:80"
     volumes:
       - ./website:/var/www/html
     depends_on:
@@ -17,7 +17,7 @@ services:
       dockerfile: docker/Dockerfile
     container_name: php-admin-panel
     ports:
-      - "8888:80"
+      - "3001:80"
     volumes:
       - ./admin-panel:/var/www/html
     depends_on:
@@ -39,17 +39,6 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./website/config/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: always
-    ports:
-      - "8081:80"
-    environment:
-      PMA_HOST: db
-    depends_on:
-      - db
 
 volumes:
   db_data:
