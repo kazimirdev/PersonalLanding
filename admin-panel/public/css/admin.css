@@ -658,6 +658,17 @@ table tbody tr:last-child td {
     margin-bottom: 0;
 }
 
+.post-preview {
+    padding: 0.75rem 1rem;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-left: 3px solid var(--primary-color);
+    background-color: var(--background-color);
+    margin: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
 .post-price {
     padding: 0.5rem 1rem;
     color: var(--text-color);

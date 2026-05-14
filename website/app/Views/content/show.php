@@ -17,9 +17,6 @@ include __DIR__ . '/../layouts/header.php';
                 <?= $post['content_html'] ?>
             </div>
         </article>
-        <div class="post-navigation">
-            <a href="/content" class="btn-back"><?= get_i18n('back to content') ?></a>
-        </div>
     </div>
 </main>
 

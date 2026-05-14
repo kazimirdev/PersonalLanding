@@ -23,7 +23,7 @@
             }
             
             $prepage = $_SERVER['HTTP_REFERER'] ?? '/';
-            $page_title_header = $post['title'];
+            $page_title_header = "[kazimir.dev]";
             require __DIR__ . '/../Views/content/show.php';
         }
     }

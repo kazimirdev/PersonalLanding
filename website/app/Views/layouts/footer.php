@@ -15,9 +15,9 @@
         <div class="page-width-modifier-buttons radio-horizontal">
             <form class="boxed" id="page-width">
                 <input type="radio" id="page-narrow" name="page-width" value="narrow">
-                <label class="boxed" for="page-narrow">Narrow</label>
+                <label class="boxed" for="page-narrow"><?php echo get_i18n('narrow'); ?></label>
                 <input type="radio" id="page-wide" name="page-width" value="wide">
-                <label class="boxed" for="page-wide">Wide</label>
+                <label class="boxed" for="page-wide"><?php echo get_i18n('wide'); ?></label>
             </form>
         </div>
     </div>

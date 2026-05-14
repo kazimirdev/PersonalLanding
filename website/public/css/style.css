@@ -1,41 +1,44 @@
 :root {
     --pl-svg: url('../img/Flag_of_Poland.svg'); /* Replace with your Polish flag image */
     --uk-svg: url('../img/Flag_of_the_United_Kingdom.svg'); /* Replace with your UK flag image */
-    --primary-color: #007f4e;
+    --primary-color: #9FCB98;
     --primary-color-theme-slider: #000000;
-    --secondary-color: #72b043;
+    --secondary-color: #79AE6F;
     --secondary-color-theme-slider: #808080;
     --thrird-color: #000;
     --text-color: #000;
     --hover-color: #ed5300;
-    --font-size-p:  1.425rem;
-    --font-size-h1: 1.65rem;
-    --font-size-h2: 1.6rem;
-    --font-size-h3: 1.55rem;
-    --font-size-h4: 1.5rem;
-    --font-size-h5: 1.45rem;
-    --font-size-h6: 1.425rem;
+    --font-size-p:  1.25em;
+    --font-size-p-post-preview:  .925em;
+    --font-size-h1: 1.65em;
+    --font-size-h2: 1.6em;
+    --font-size-h3: 1.55em;
+    --font-size-h4: 1.5em;
+    --font-size-h5: 1.45em;
+    --font-size-h6: 1.425em;
     --max-content-width: 10%;
 }
 
 :root[data-font-size="small"] {
-    --font-size-p:  1.275rem;
-    --font-size-h1: 1.5rem;
-    --font-size-h2: 1.45rem;
-    --font-size-h3: 1.4rem;
-    --font-size-h4: 1.35rem;
-    --font-size-h5: 1.3rem;
-    --font-size-h6: 1.275rem;
+    --font-size-p:  1em;
+    --font-size-p-post-preview:  .775em;
+    --font-size-h1: 1.5em;
+    --font-size-h2: 1.45em;
+    --font-size-h3: 1.4em;
+    --font-size-h4: 1.35em;
+    --font-size-h5: 1.3em;
+    --font-size-h6: 1.275em;
 }
 
 :root[data-font-size="large"] {
-    --font-size-p:  1.575rem;
-    --font-size-h1: 1.7rem;
-    --font-size-h2: 1.675rem;
-    --font-size-h3: 1.65rem;
-    --font-size-h4: 1.625rem;
-    --font-size-h5: 1.6rem;
-    --font-size-h6: 1.575rem;
+    --font-size-p:  1.5em;
+    --font-size-p-post-preview:  1.075em;
+    --font-size-h1: 1.7em;
+    --font-size-h2: 1.675em;
+    --font-size-h3: 1.65em;
+    --font-size-h4: 1.625em;
+    --font-size-h5: 1.6em;
+    --font-size-h6: 1.575em;
 }
 
 :root[data-theme="dark"] {
@@ -112,13 +115,16 @@ body {
 }
 
 header {
+    background-color: var(--secondary-color);
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     position: fixed;
-    width: 98%;
-    right: 1%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 header h1 {
@@ -245,7 +251,7 @@ input:checked + .slider:before {
 .content-feed {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   align-items: stretch;
   margin: 2rem auto 4rem;
 }
@@ -256,12 +262,13 @@ input:checked + .slider:before {
 
 .content-post {
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  align-content: space-between;
   gap: 0.75rem;
   border: solid 0.2rem var(--hover-color);
   border-radius: 1.25rem;
   padding: 1.5rem;
-  min-height: 16rem;
+  height: 12em;
+  width: auto;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent);
   box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.12);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -280,7 +287,7 @@ input:checked + .slider:before {
 }
 
 .content-post p {
-  font-size: var(--font-size-p);
+  font-size: var(--font-size-p-post-preview);
   opacity: 0.9;
   line-height: 1.4;
 }
@@ -295,7 +302,7 @@ input:checked + .slider:before {
 
 .content-post-single {
   max-width: 900px;
-  margin: 2.5rem auto 4rem;
+  margin: 2.5rem auto 7rem;
   padding: 2rem;
   border-radius: 1.5rem;
   border: solid 0.2rem var(--hover-color);
@@ -325,6 +332,8 @@ input:checked + .slider:before {
 .content-post-single .post-content {
   display: grid;
   gap: 1rem;
+  color: var(--text-color);
+  font-size: var(--font-size-p)
 }
 
 @media only screen and (max-width: 768px) {
@@ -345,12 +354,16 @@ input:checked + .slider:before {
 footer {
   display: grid;
   grid-auto-flow: column;
-  justify-content: space-between;
+  justify-content: space-around;
   position: fixed;
+  background-color: var(--secondary-color);
   color: var(--text-color);
   width: 99%;
-  margin: 2.5rem 0 0.5rem 0;
+  padding: 0.75rem;
   bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 footer .font-settings, footer .page-width-settings {

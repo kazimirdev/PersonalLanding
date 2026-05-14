@@ -108,6 +108,11 @@
                                     <div class="md-preview" id="preview_<?php echo $locale; ?>" class="md-preview-pane"></div>
                                 </div>
                                 <p class="md-hint">Supports Markdown syntax • Preview updates as you type</p>
+
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <label>Preview Text (auto-generated from content)</label>
+                                    <textarea id="content_preview_<?php echo $locale; ?>" class="content-preview-display" style="background: #f5f5f5; padding: 10px; border-radius: 4px; min-height: 40px; word-wrap: break-word;"></textarea>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -180,15 +185,34 @@
 </main>
 
 <script>
+// Generate preview text from markdown (first 200 chars)
+function generatePreviewText(markdown) {
+    // Strip markdown syntax
+    const text = markdown.replace(/[#*`\[\]()]/g, '');
+    // Trim to 200 characters
+    let preview = text.substring(0, 200).trim();
+    if (text.length > 200) {
+        preview += '...';
+    }
+    return preview;
+}
+
 // Simple Markdown Preview using improved renderer
 function updatePreview(locale) {
     const textarea = document.getElementById('content_' + locale);
     const preview = document.getElementById('preview_' + locale);
+    const previewDisplay = document.getElementById('content_preview_' + locale);
+    
     if (!textarea || !preview) return;
     
     const markdown = textarea.value;
     const html = markdownToHtml(markdown);
     preview.innerHTML = html;
+    
+    // Update preview text display
+    if (previewDisplay) {
+        previewDisplay.textContent = generatePreviewText(markdown) || '(No content yet)';
+    }
 }
 
 // Insert Markdown syntax
@@ -239,6 +263,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Initial preview
         updatePreview(locale);
+        
+        // Initialize preview text display
+        const previewDisplay = document.getElementById('content_preview_' + locale);
+        if (previewDisplay) {
+            previewDisplay.textContent = generatePreviewText(textarea.value) || '(No content yet)';
+        }
     });
 });
 

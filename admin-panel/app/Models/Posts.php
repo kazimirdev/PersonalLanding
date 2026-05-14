@@ -25,20 +25,22 @@ class Posts extends DatabaseModel {
             foreach ($translations as $locale => $data) {
                 $statement_post_translations = $this->db->prepare(
                     "INSERT INTO post_translations (
-                        post_id, locale, title, content_md, content_html
+                        post_id, locale, title, content_md, content_html, content_preview
                         ) VALUES (
                             :post_id, 
                             :locale, 
                             :title, 
                             :content_md, 
-                            :content_html)"
+                            :content_html,
+                            :content_preview)"
                 );
                 $statement_post_translations->execute([
                     'post_id' => $postId,
                     'locale' => $locale,
                     'title' => $data['title'],
                     'content_md' => $data['content_md'],
-                    'content_html' => $data['content_html']
+                    'content_html' => $data['content_html'],
+                    'content_preview' => $data['content_preview'] ?? null
                 ]);
             }
 
@@ -60,7 +62,8 @@ class Posts extends DatabaseModel {
                     pt.title, 
                     pt.locale,
                     pt.content_md,
-                    pt.content_html
+                    pt.content_html,
+                    pt.content_preview
              FROM posts p 
              JOIN post_translations pt ON p.id = pt.post_id 
              WHERE pt.locale = :locale"
@@ -72,7 +75,7 @@ class Posts extends DatabaseModel {
     public function getBySlugAndLocale(string $slug, string $locale, bool $is_md = false): ?array {
         $content_type = $is_md ? 'content_md' : 'content_html';
         $statement = $this->db->prepare(
-            "SELECT p.id, p.slug, p.image_preview_url, pt.title, $content_type, pt.locale, p.created_at, p.updated_at
+            "SELECT p.id, p.slug, p.image_preview_url, pt.title, $content_type, pt.locale, p.created_at, p.updated_at, pt.content_preview
              FROM posts p 
              JOIN post_translations pt ON p.id = pt.post_id 
              WHERE p.slug = :slug AND pt.locale = :locale"
@@ -96,7 +99,7 @@ class Posts extends DatabaseModel {
 
         // Fetch all translations
         $statement_trans = $this->db->prepare(
-            "SELECT locale, title, content_md, content_html
+            "SELECT locale, title, content_md, content_html, content_preview
              FROM post_translations
              WHERE post_id = :id
              ORDER BY locale"
@@ -153,7 +156,8 @@ class Posts extends DatabaseModel {
                     "UPDATE post_translations SET 
                         title = :title, 
                         content_md = :content_md, 
-                        content_html = :content_html 
+                        content_html = :content_html,
+                        content_preview = :content_preview
                     WHERE post_id = :post_id AND locale = :locale"
                 );
                 $statement_trans->execute([
@@ -161,7 +165,8 @@ class Posts extends DatabaseModel {
                     'locale' => $locale,
                     'title' => $data['title'],
                     'content_md' => $data['content_md'],
-                    'content_html' => $data['content_html']
+                    'content_html' => $data['content_html'],
+                    'content_preview' => $data['content_preview'] ?? null
                 ]);
             }
 

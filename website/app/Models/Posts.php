@@ -60,7 +60,8 @@ class Posts extends DatabaseModel {
                     pt.title, 
                     pt.locale,
                     pt.content_md,
-                    pt.content_html
+                    pt.content_html,
+                    pt.content_preview
              FROM posts p 
              JOIN post_translations pt ON p.id = pt.post_id 
              WHERE pt.locale = :locale"
@@ -72,7 +73,7 @@ class Posts extends DatabaseModel {
     public function getBySlugAndLocale(string $slug, string $locale, bool $is_md = false): ?array {
         $content_type = $is_md ? 'content_md' : 'content_html';
         $statement = $this->db->prepare(
-            "SELECT p.id, p.slug, p.image_preview_url, pt.title, $content_type, pt.locale, p.created_at, p.updated_at
+            "SELECT p.id, p.slug, p.image_preview_url, pt.title, $content_type, pt.locale, p.created_at, p.updated_at, pt.content_preview
              FROM posts p 
              JOIN post_translations pt ON p.id = pt.post_id 
              WHERE p.slug = :slug AND pt.locale = :locale"

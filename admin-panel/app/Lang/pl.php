@@ -4,6 +4,8 @@ return [
     'social_links' => 'linki zewnętrzne',
     'content' => 'treść',
     'products' => 'produkty',
+    'narrow' => 'wąska',
+    'wide' => 'szeroka',
 ];
 
 ?>
