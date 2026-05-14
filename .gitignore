@@ -25,6 +25,7 @@ admin-panel/public/uploads/
 .phpunit.result.cache
 
 # SQL dumps and DB files
+^create_schema.sql$
 *.sql
 *.sql.gz
 *.sqlite

@@ -39,6 +39,9 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./website/config/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./website/docker/entrypoint.sh:/usr/local/bin/docker-entrypoint-wrapper.sh
+    entrypoint: /usr/local/bin/docker-entrypoint-wrapper.sh
+    command: docker-entrypoint.sh mysqld
 
 volumes:
   db_data:
