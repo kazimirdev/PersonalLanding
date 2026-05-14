@@ -38,7 +38,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./website/config/create_schema.sql:/tmp/create_schema.sql
+      - ./website/config:/config
       - ./website/docker/entrypoint.sh:/usr/local/bin/docker-entrypoint-wrapper.sh
     entrypoint: /usr/local/bin/docker-entrypoint-wrapper.sh
     command: mysqld
