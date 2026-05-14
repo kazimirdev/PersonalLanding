@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS post_translations (
     title VARCHAR(255) NOT NULL,
     content_md TEXT NOT NULL,
     content_html TEXT NOT NULL,
-    content_preview TEXT,
+    content_preview TEXT NOT NULL,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
 );
 
