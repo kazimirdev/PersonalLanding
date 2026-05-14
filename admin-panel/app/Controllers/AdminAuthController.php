@@ -5,8 +5,8 @@ class AdminAuthController {
     }
 
     public function login() {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
 
         $config = require __DIR__ . '/../../config/admin.php';
         $adminUsername = $config['admin_username'];

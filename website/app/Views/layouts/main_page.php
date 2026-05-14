@@ -7,9 +7,9 @@
             <line>--------------------------------</line>
             <h2><?php echo get_i18n('social_links'); ?></h2>
             <a href="https://github.com/kazimirdev" target="_blank"><p>github</p></a><br>
-            <a href="https://t.me/kazimirdev_channel" target="_blank"><p>telegram</p></a><br>
-            <a href="https://linkedin.com/in/kazimir" target="_blank"><p>linkedin</p></a><br>
-            <a href="https://linkedin.com/in/kazimir" target="_blank"><p>simplex</p></a><br>
+            <a href="https://t.me/kazimirdev" target="_blank"><p>telegram</p></a><br>
+            <a href="https://linkedin.com/in/kazimirdev" target="_blank"><p>linkedin</p></a><br>
+            <a href="https://smp12.simplex.im/a#rLp0AjeoUzOcZ87mNXB3dBBGjtIyhQHhu5gmluP5MVA" target="_blank"><p>simplex</p></a><br>
             <a href="mailto:kazimirdev@tuta.io"><p>mail</p></a>
         </div>
 </main>
