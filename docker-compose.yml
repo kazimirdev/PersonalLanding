@@ -16,8 +16,8 @@ services:
       context: ./admin-panel
       dockerfile: docker/Dockerfile
     container_name: php-admin-panel
-    ports:
-      - "3001:80"
+    expose:
+      - "80"
     volumes:
       - ./admin-panel:/var/www/html
     depends_on:
@@ -34,8 +34,8 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     volumes:
       - db_data:/var/lib/mysql
       - ./website/config/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
