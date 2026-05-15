@@ -1,3 +1,14 @@
+<?php
+// Initialize $post if not set (create mode)
+if (!isset($post)) {
+    $post = [
+        'id' => null,
+        'slug' => '',
+        'image_preview_url' => '',
+        'translations' => []
+    ];
+}
+?>
 <main class="admin-edit-panel">
     <div class="edit-header">
         <h1>Text Redactor</h1>
@@ -6,7 +17,7 @@
         </div>
     </div>
 
-    <form method="POST" action="/content/<?php echo htmlspecialchars($post['id']); ?>/update" class="edit-form">
+    <form method="POST" action="<?php echo isset($post['id']) && $post['id'] ? '/content/' . htmlspecialchars($post['id']) . '/update' : '/content/store'; ?>" class="edit-form">
         <!-- Post Metadata Section -->
         <section class="form-section">
             <h2>Post Settings</h2>
@@ -122,7 +133,7 @@
 
         <!-- Form Actions -->
         <section class="form-section form-actions">
-            <button type="submit" class="btn btn-primary btn-lg">Update Post</button>
+            <button type="submit" class="btn btn-primary btn-lg"><?php echo isset($post['id']) && $post['id'] ? 'Update Post' : 'Create Post'; ?></button>
             <a href="/content" class="btn btn-secondary btn-lg">Cancel</a>
         </section>
     </form>

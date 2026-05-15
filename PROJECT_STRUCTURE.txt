@@ -1,0 +1,69 @@
+.
+├── admin-panel
+│   ├── app
+│   │   ├── Controllers
+│   │   ├── Core
+│   │   ├── css
+│   │   ├── Helpers
+│   │   ├── img
+│   │   ├── js
+│   │   ├── Lang
+│   │   ├── Middlewares
+│   │   ├── Models
+│   │   ├── static
+│   │   └── Views
+│   ├── config
+│   │   ├── admin.php
+│   │   ├── create_schema.sql
+│   │   └── db.php
+│   ├── docker
+│   │   └── Dockerfile
+│   └── public
+│       ├── css
+│       ├── img
+│       ├── js
+│       └── index.php
+├── docker
+│   ├── mysql
+│   │   └── init.sql
+│   └── nginx
+│       ├── conf
+│       ├── fail2ban
+│       └── Dockerfile
+├── website
+│   ├── app
+│   │   ├── Controllers
+│   │   ├── Core
+│   │   ├── Helpers
+│   │   ├── Lang
+│   │   ├── Middlewares
+│   │   ├── Models
+│   │   ├── Services
+│   │   ├── static
+│   │   └── Views
+│   ├── config
+│   │   ├── admin.php
+│   │   ├── create_schema.sql
+│   │   └── db.php
+│   ├── docker
+│   │   └── Dockerfile
+│   └── public
+│       ├── css
+│       ├── img
+│       ├── js
+│       ├── favicon (1).ico
+│       ├── favicon.ico
+│       └── index.php
+├── configure-admin-ip.sh
+├── DEPLOYMENT_CHECKLIST.md
+├── DEPLOYMENT.md
+├── docker-compose.yml
+├── PROJECT_STRUCTURE.txt
+├── QUICKSTART.md
+├── README.md
+├── SECURITY.md
+├── SECURITY_SUMMARY.md
+├── setup-env.sh
+└── validate-security.sh
+
+42 directories, 25 files
