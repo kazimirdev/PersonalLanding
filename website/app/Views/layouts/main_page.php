@@ -2,7 +2,7 @@
         <div class ="main-page-links">  
             <h2><?php echo get_i18n('website_links'); ?></h2>
             <a href="/content"><p><?php echo get_i18n('content'); ?></p></a><br/>
-            <a href="/products"><p><?php echo get_i18n('products'); ?></p></a><br/>
+            <!-- <a href="/products"><p><?php echo get_i18n('products'); ?></p></a><br/> -->
             <a href="/cv.pdf" target="_blank"><p>cv.pdf</p></a><br/>
             <line>--------------------------------</line>
             <h2><?php echo get_i18n('social_links'); ?></h2>
