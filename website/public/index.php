@@ -26,6 +26,7 @@
     $uri = $i18n['uri']; // use the clean URI for routing
     $GLOBALS['locale'] = $i18n['locale']; // make locale available globally
     $GLOBALS['lang'] = $i18n['lang']; // make language data available globally
+    $GLOBALS['current_uri'] = $uri; // make current URI available globally for controllers
 
     spl_autoload_register(function ($class) {
         // spl_autoload_register is used to automatically load classes when they are needed,

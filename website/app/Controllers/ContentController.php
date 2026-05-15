@@ -4,7 +4,7 @@
             $locale = I18N::get_locale();
             $postModel = new Posts();
             $posts = $postModel->getAllByLocale($GLOBALS['locale']);
-            $prepage = $_SERVER['HTTP_REFERER'] ?? '/';
+            $prepage = url(getParentPage()) ?: '/';
             $page_title_header = get_i18n('content');
 
             require __DIR__ . '/../Views/content/index.php';
@@ -22,7 +22,7 @@
                 return;
             }
             
-            $prepage = $_SERVER['HTTP_REFERER'] ?? '/';
+            $prepage = url(getParentPage());
             $page_title_header = "[kazimir.dev]";
             require __DIR__ . '/../Views/content/show.php';
         }
